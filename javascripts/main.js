@@ -1,11 +1,40 @@
 $(document).ready(function() {
 
-//accepts array, writes DOM of pages
-	const writeDOM = (dataArray) => {
-		let domString = "";
-		console.log("i'm in the dom writer function", dataArray);
+	const outputContainer = $("#heroContainer");
+	let thisTarget = "";
+	let currentTeam = "";
 
-	// writeDOM function should write everything to DOM
+//accepts array, writes DOM of pages
+	const writeDOM = (data) => {
+		let domString = "";
+		let counter = 0;
+		console.log("in write dom", data);
+		for (let i = 0; i < data.length; i++){
+			if (counter % 3 === 0) {
+				domString += `<div class="row">`;
+			}
+
+			console.log("im in the loop", data);
+			domString += `<div class="panel panel-default"><div class="panel-heading">`;
+			domString += `<h3 class="panel-title">Panel title</h3></div>`;
+			domString += `<div class="panel-body">${data[x].description}`;
+			domString += `<img src="${data[x].image}" alt="${data[x].name}" class="img-circle">`;
+			domString += `</div></div>`;
+			domString += ``;
+
+			counter++;
+			if (counter % 3 === 0) {
+				domString += `</div>`;
+			}
+
+			// if (data[x].name === thisTarget) {
+			// 	currentTeam.push(data[x].id);
+			// 	console.log("meow", data);
+
+			// }
+		}
+
+		outputContainer.append(domString);
 		// image displayed in circle with pink/blue border for female/male
 			// <img src="..." alt="..." class="img-circle">
 		// 4 panels in each row, created with bootstrap row class
@@ -22,13 +51,13 @@ $(document).ready(function() {
 	};
 
 
+
 // button click event, hides marvel image, calls dataGetter
 	$(".btn").click((event) => {
-  		console.log($(event.currentTarget));
+  		thisTarget = $(event.currentTarget)[0].innerHTML;
     	$(".loadBrand").hide();
     	dataGetter();
   	});
-
 
 // promises, resolves getting json data functions, passes dataArray to writeDOM
 	const dataGetter = () => {
@@ -58,26 +87,28 @@ $(document).ready(function() {
 			});
 		};
 
-
-
-
 		loadTeams().then((teamData) => {
 			teamData.forEach((teams) => {
 				dataArray.push(teams);
-				//data.value="teams";
+				teams.sort="teams";
 			});
 			return loadGenders();
 		}).then((genderData) => {
 			genderData.forEach((gender) => {
 				dataArray.push(gender);
+				gender.sort="gender";
+
 			});
 			return loadCharacters();
 		}).then((characterData) => {
 			characterData.forEach((character) => {
 				dataArray.push(character);
-					writeDOM(dataArray);
+				character.sort="character";
+
 			});
 		});
-};
 
+	writeDOM(dataArray);
+
+	};
 });
