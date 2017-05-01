@@ -1,6 +1,11 @@
 $(document).ready(function() {
 
 	const outputContainer = $("#heroContainer");
+	let dataArray = [];
+	let	myTeams = [];
+	let	myGenders = [];
+	let	myCharacters = [];
+
 	let thisTarget = "";
 	let currentTeam = "";
 
@@ -8,19 +13,17 @@ $(document).ready(function() {
 	const writeDOM = (data) => {
 		let domString = "";
 		let counter = 0;
-		console.log("in write dom", data);
-		for (let i = 0; i < data.length; i++){
+		console.log("in write dom", dataArray);
+		for (let i = 0; i < dataArray.length; i++){
 			if (counter % 3 === 0) {
 				domString += `<div class="row">`;
 			}
-
-			console.log("im in the loop", data);
 			domString += `<div class="panel panel-default"><div class="panel-heading">`;
 			domString += `<h3 class="panel-title">Panel title</h3></div>`;
 			domString += `<div class="panel-body">${data[x].description}`;
 			domString += `<img src="${data[x].image}" alt="${data[x].name}" class="img-circle">`;
 			domString += `</div></div>`;
-			domString += ``;
+			//domString += ``;
 
 			counter++;
 			if (counter % 3 === 0) {
@@ -61,7 +64,6 @@ $(document).ready(function() {
 
 // promises, resolves getting json data functions, passes dataArray to writeDOM
 	const dataGetter = () => {
-		const dataArray = [];
 
 		const loadTeams = () => {
 			return new Promise((resolve, reject) => {
@@ -87,28 +89,31 @@ $(document).ready(function() {
 			});
 		};
 
-		loadTeams().then((teamData) => {
-			teamData.forEach((teams) => {
-				dataArray.push(teams);
-				teams.sort="teams";
+		Promise.all([loadTeams(), loadGenders(), loadCharacters()])
+		.then((result) => {
+			result.forEach((xhrResult) => {
+				dataArray.push(xhrResult);
 			});
-			return loadGenders();
-		}).then((genderData) => {
-			genderData.forEach((gender) => {
-				dataArray.push(gender);
-				gender.sort="gender";
+			sortArray();
 
-			});
-			return loadCharacters();
-		}).then((characterData) => {
-			characterData.forEach((character) => {
-				dataArray.push(character);
-				character.sort="character";
+		})
+		.catch((loadError) => console.log(loadError));
 
-			});
-		});
 
-	writeDOM(dataArray);
+	  };
+
+	const sortArray = () => {
+		console.log("hi", dataArray);
+		console.log("first", dataArray.length);
+			for (var i = 0; i > dataArray.length; i++) {
+				if (dataArray[i].name === "X-men" || "The Avengers" || "Guardians of the Galaxy") {
+					myTeams.push(dataArray[i]);
+				} else if (dataArray[i].type === "Male" || "Female") {
+					myGenders.push(dataArray[i]);
+				} else (myCharacters.push(dataArray[i]));
+			}
+			console.log("did it work", myTeams, myGenders, myCharacters);
 
 	};
+
 });
