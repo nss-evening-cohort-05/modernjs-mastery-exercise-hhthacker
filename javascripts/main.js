@@ -35,10 +35,15 @@ $(document).ready(function() {
         }
     };
 
-    const styleCharacters = () => {
-
-
-    };
+    const fillDescription = () => {
+        for (let i = 0; i < characters.length; i++) {
+            if (characters[i].gender_id == genders[0].id && characters[i].description === "") {
+                characters[i].description = "abcde fghij klmno pqrst uvwxy z";
+            } else if (characters[i].gender_id == genders[1].id && characters[i].description === "") {
+                characters[i].description = "1234567890";
+            }
+        }
+    }; 
 
     const writeDomString = () => {
         counter = 0;
@@ -50,7 +55,7 @@ $(document).ready(function() {
                 domString += `<div class="panel panel-default"><div class="panel-heading">`;
                 domString += `<h3 class="panel-title">Panel title</h3></div>`;
                 domString += `<div class="panel-body">${characters[r].description}`;
-                domString += `<img src="${characters[r].image}" alt="${characters[r].name}" class="img-circle">`;
+                domString += `<img src="${characters[r].image}" alt="${characters[r].name}" class="img-circle border-${characters[r].gender_id}">`;
                 domString += `</div></div>`;
                 //domString += ``;
 
@@ -67,9 +72,9 @@ $(document).ready(function() {
     //accepts array, writes DOM of pages
     const writeDOM = () => {
         matchTeam();
-        styleCharacters();
+        fillDescription();
         writeDomString();
-        outputContainer.append(domString);
+        outputContainer.html(domString);
     };
 
 

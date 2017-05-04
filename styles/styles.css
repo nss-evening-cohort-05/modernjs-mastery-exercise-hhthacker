@@ -30,7 +30,18 @@ img.loadBrand {
 	padding-bottom: 300px;
 }
 
+.border-0 {
+	border: 5px solid pink;
+}
+
+.border-1 {
+	border: 5px solid blue;
+}
+
+
 /*challenges*/
+
+
 
 /** Dynamically add the team button in the navbar
 * Styling:  The Marvel Hex colors are:
