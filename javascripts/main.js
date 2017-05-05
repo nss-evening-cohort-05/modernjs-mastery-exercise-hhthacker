@@ -1,7 +1,6 @@
 $(document).ready(function() {
-
-    const outputContainer = $("#heroContainer");
-    // const buttonContainer = $("#buttonBucket");
+//variables
+    let outputContainer = $("#heroContainer");
     let dataArray = [];
     let teams = [];
     let genders = [];
@@ -9,83 +8,9 @@ $(document).ready(function() {
     let thisTeam = "";
     let thisTeamId = "";
     let domString = "";
+    let counter = 0;
 
-
-    // const generateBtn = () => {
-    //     let buttonString = "";
-    //     for (var x = 0; x < dataArray[0].length; x++) {
-    //         buttonString += `<button id="${dataArray[0][x]}" type="button" class="btn btn-primary navbar-btn">${dataArray[0][x]}</button>`;
-    //     }
-    //     buttonContainer.html(buttonString);
-    // };
-
-
-    // image displayed in circle with pink/blue border for female/male
-    // if character lacks description, add based on gender
-    // female: "abcde fghij klmno pqrst uvwxy z"
-    // male: "1234567890"
-
-
-    //loop through team names and matches with button name
-    const matchTeam = () => {
-        for (let q = 0; q < teams.length; q++) {
-            if (thisTeam == teams[q].name) {
-                teamId = teams[q].id;
-            }
-        }
-    };
-
-    const fillDescription = () => {
-        for (let i = 0; i < characters.length; i++) {
-            if (characters[i].gender_id == genders[0].id && characters[i].description === "") {
-                characters[i].description = "abcde fghij klmno pqrst uvwxy z";
-            } else if (characters[i].gender_id == genders[1].id && characters[i].description === "") {
-                characters[i].description = "1234567890";
-            }
-        }
-    }; 
-
-    const writeDomString = () => {
-        counter = 0;
-        for (let r = 0; r < characters.length; r++) {
-            if (characters[r].team_id == teamId) {
-                if (counter % 4 === 0) {
-                    domString += `<div class="row">`;
-                }
-                domString += `<div class="panel panel-default"><div class="panel-heading">`;
-                domString += `<h3 class="panel-title">Panel title</h3></div>`;
-                domString += `<div class="panel-body">${characters[r].description}`;
-                domString += `<img src="${characters[r].image}" alt="${characters[r].name}" class="img-circle border-${characters[r].gender_id}">`;
-                domString += `</div></div>`;
-                //domString += ``;
-
-                counter++;
-                if (counter % 4 === 0) {
-                    domString += `</div>`;
-                }
-
-            }
-        }
-
-    };
-
-    //accepts array, writes DOM of pages
-    const writeDOM = () => {
-        matchTeam();
-        fillDescription();
-        writeDomString();
-        outputContainer.html(domString);
-    };
-
-
-    // button click event, hides marvel image, calls dataGetter
-    $(".btn").click((event) => {
-        thisTeam = $(event.currentTarget)[0].innerHTML;
-        $(".loadBrand").hide();
-        dataGetter();
-    });
-
-    // promises, resolves getting json data functions, passes dataArray to writeDOM
+// promises, resolves getting json data functions, splits dataArray and calls writeDOM
     const dataGetter = () => {
         const loadTeams = () => {
             return new Promise((resolve, reject) => {
@@ -120,4 +45,58 @@ $(document).ready(function() {
             })
             .catch((loadError) => console.log(loadError));
     };
+
+//functions for matching team name with id, filling description, and wriing domString.
+    const matchTeam = () => {
+        for (let q = 0; q < teams.length; q++) {
+            if (thisTeam == teams[q].name) {
+                teamId = teams[q].id;
+            }
+        }
+    };
+
+    const fillDescription = () => {
+        for (let i = 0; i < characters.length; i++) {
+            if (characters[i].gender_id == genders[0].id && characters[i].description === "") {
+                characters[i].description = "abcde fghij klmno pqrst uvwxy z";
+            } else if (characters[i].gender_id == genders[1].id && characters[i].description === "") {
+                characters[i].description = "1234567890";
+            }
+        }
+    };
+
+    const writeDomString = () => {
+            domString = "";
+        for (let r = 0; r < characters.length; r++) {
+            if (characters[r].team_id == teamId) {
+                if (counter % 4 === 0) {
+                    domString += `<div class="row">`;
+                }
+                domString += `<div class="panel panel-default col-md-3 red"><div class="panel-heading">`;
+                domString += `<h3 class="panel-title">${characters[r].name}</h3></div>`;
+                domString += `<img src="${characters[r].image}" alt="${characters[r].name}" class="img-circle center-block border-${characters[r].gender_id}">`;
+                domString += `<div class="panel-body">${characters[r].description}`;
+                domString += `</div></div>`;
+                counter++;
+                if (counter % 4 === 0) {
+                    domString += `</div>`;
+                }
+            }
+        }
+    };
+
+//writes DOM of pages
+    const writeDOM = () => {
+        matchTeam();
+        fillDescription();
+        writeDomString();
+        outputContainer.html(domString);
+    };
+
+// button click event, hides marvel image, calls dataGetter
+    $(".btn").click((event) => {
+        thisTeam = $(event.currentTarget)[0].innerHTML;
+        $(".loadBrand").hide();
+        dataGetter();
+    });
 });

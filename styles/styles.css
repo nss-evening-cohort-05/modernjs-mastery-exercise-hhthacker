@@ -1,6 +1,4 @@
-
-/* nav bar & button styling */
-
+/********************************* nav bar & button styling */
 img.navBrand {
 	height: 35px;
 	margin-bottom: 15px;
@@ -9,20 +7,30 @@ img.navBrand {
 button {
 	margin-left: 15px;
 	margin-right: 15px;
+	color: #518cca;
 }
 
-/* on load main div styling */
+.btn-primary {
+	border-color: #518cca;
+	background-color: #518cca;
+}
 
+/********************************* on load main div and card styling */
 body {
 	background-color: #0e0e0e;
+	font-size: 13px;
+	font-weight: 600;
 }
 
 .container {
-    height: 100%;
-    display: flex;
+    background-color: #504a4a;
+}
+
+.flex {
+	display: flex;
+	flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: #504a4a;
 }
 
 img.loadBrand {
@@ -30,23 +38,31 @@ img.loadBrand {
 	padding-bottom: 300px;
 }
 
+.img-circle {
+	width: 130px;
+}
+
+/********************************* gender borders */
 .border-0 {
-	border: 5px solid pink;
+	border: 3px solid pink;
 }
 
 .border-1 {
-	border: 5px solid blue;
+	border: 3px solid blue;
 }
 
+/********************************* marvel colors */
+.panel-default > .panel-heading {
+	font: #504a4a;
+	background-color: #f78f3f;
+	margin: 3px;
+}
 
-/*challenges*/
+.panel {
+	height: 380px;
+}
 
-
-
-/** Dynamically add the team button in the navbar
-* Styling:  The Marvel Hex colors are:
-	* Red = #e23636	
-	* Black = #000000	
-	* Gray = #504a4a	
-	* Blue = #518cca	
-	* Orange = #f78f3f*/
+.red {
+	color: #e23636;
+	background-color: #504a4a;
+}
