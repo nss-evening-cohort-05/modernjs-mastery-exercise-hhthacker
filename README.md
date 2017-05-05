@@ -8,9 +8,9 @@
 * NPM: Grunt
 * Bootstrap
 
-##Screenshot
-![Screenshot]()
+## Screenshot
+![Screenshot](https://raw.githubusercontent.com/nss-evening-cohort-05/modernjs-mastery-exercise-hhthacker/challenge/images/marvelquiz.png)
 
 
-###Contributor:
-[Heather Thacker] (https://github.com/hhthacker)
+### Contributor:
+[Heather Thacker](https://github.com/hhthacker)
