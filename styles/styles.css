@@ -1,0 +1,68 @@
+/********************************* nav bar & button styling */
+img.navBrand {
+	height: 35px;
+	margin-bottom: 15px;
+}
+
+button {
+	margin-left: 15px;
+	margin-right: 15px;
+	color: #518cca;
+}
+
+.btn-primary {
+	border-color: #518cca;
+	background-color: #518cca;
+}
+
+/********************************* on load main div and card styling */
+body {
+	background-color: #0e0e0e;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.container {
+    background-color: #504a4a;
+}
+
+.flex {
+	display: flex;
+	flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+img.loadBrand {
+	padding-top: 25px;
+	padding-bottom: 300px;
+}
+
+.img-circle {
+	width: 130px;
+}
+
+/********************************* gender borders */
+.border-0 {
+	border: 3px solid pink;
+}
+
+.border-1 {
+	border: 3px solid blue;
+}
+
+/********************************* marvel colors */
+.panel-default > .panel-heading {
+	font: #504a4a;
+	background-color: #f78f3f;
+	margin: 3px;
+}
+
+.panel {
+	height: 380px;
+}
+
+.red {
+	color: #e23636;
+	background-color: #504a4a;
+}
